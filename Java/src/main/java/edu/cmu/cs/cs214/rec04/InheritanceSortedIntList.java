@@ -1,16 +1,28 @@
 package edu.cmu.cs.cs214.rec04;
 
-/**
- * InheritanceSortedIntList -- a variant of a SortedIntList that keeps
- * count of the number of attempted element insertions (not to be confused
- * with the current size, which goes down when an element is removed)
- * and exports an accessor (totalAdded) for this count.
- *
- * @author Nora Shoemaker
- *
- */
+// InheritanceSortedIntList.java
+public class InheritanceSortedIntList extends SortedIntList {
+    private int totalAdded = 0;
 
-public class InheritanceSortedIntList {
-    // Write your implementation below with API documentation
+    // Override the add method
+    @Override
+    public boolean add(int element) {
+        super.add(element);  // Call the parent class's add method
+        totalAdded++;  // Increment the counter for added elements
+                return false;
+    }
 
+    // Override the addAll method
+    @Override
+    public void addAll(int[] elements) {
+        for (int element : elements) {
+            super.add(element);  // Call the parent class's add method for each element
+        }
+        totalAdded += elements.length;  // Add the number of elements added
+    }
+
+    // Method to get the total number of added elements
+    public int getTotalAdded() {
+        return totalAdded;
+    }
 }
